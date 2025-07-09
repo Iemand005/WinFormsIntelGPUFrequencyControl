@@ -9,6 +9,12 @@ namespace LevelZero
         private DeviceHandle[] _devices;
         private FrequencyHandle[] _freqHandles;
 
+        enum LevelZeroFrequency : int
+        {
+            Supported = 0,
+            Factory = -1
+        }
+
         public IntelGPUController()
         {
             int result = LevelZeroInterop.Init(1);
@@ -85,6 +91,21 @@ namespace LevelZero
                 if (result != 0)
                     throw new Exception("Failed to set frequency range.");
             }
+        }
+
+        public void SetFrequencyRange(int min, int max)
+        {
+            SetFrequencyRange((double)min, max);
+        }
+
+        public void SetFrequencyRangeToSupported()
+        {
+            SetFrequencyRange(0, 0);
+        }
+
+        public void SetFrequencyRangeToFactory()
+        {
+            SetFrequencyRange(LevelZeroFrequency.Factory, LevelZeroFrequency.Factory);
         }
     }
 }

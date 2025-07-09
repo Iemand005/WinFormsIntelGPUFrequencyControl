@@ -15,21 +15,32 @@ namespace WinFormsIntelGPUFrequencyControl
         {
             gpuController = new IntelGPUController();
             gpuController.GetSupportedFrequencyRange(out double minSupported, out double maxSupported);
-            trackBar1.Minimum = trackBar2.Minimum = (int)minSupported;
-            trackBar1.Maximum = trackBar2.Maximum = (int)maxSupported;
-            
+            minSlider.Minimum = maxSlider.Minimum = (int)minSupported;
+            minSlider.Maximum = maxSlider.Maximum = (int)maxSupported;
+
 
             gpuController.GetFrequencyRange(out double min, out double max);
-            trackBar1.Value = (int)min;
-            trackBar2.Value = (int)max;
+            SetMinSliderValue(min);
+            SetMaxSliderValue(max);
+
         }
 
         void SetMinSliderValue(double min)
         {
+            minSlider.Value = (int)min;
+        }
+
+        void SetMaxSliderValue(double max)
+        {
+            maxSlider.Value = (int)max;
+        }
+
+        private void minSlider_Scroll(object sender, EventArgs e)
+        {
 
         }
 
-        void SetMaxSliderValue(double min)
+        private void maxSlider_Scroll(object sender, EventArgs e)
         {
 
         }
