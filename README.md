@@ -1,10 +1,11 @@
 # Intel GPU Frequency tool
 
-A quick demo on how to change GPU clock speeds on Intel GPUs
+A quick demo on how to change GPU clock speeds on Intel GPUs.
+This project uses [Intel Level Zero](https://github.com/oneapi-src/level-zero) APIs. Big thanks to Intel for making this open source and available to use!
 
 Should work on Intel Xe, Arc and Battlemage.
 
-Tested on Iris Xe iGPU on 13th gen mobile CPU.
+Tested on Iris Xe iGPU on 12 and 13th gen mobile CPU. I expect it to work on older units too, depends on what Level Zero supports.
 
 Changing clock speeds should be possible on HD 3000 and up. (Using i915 driver on Linux)
 It's also possible to change clock speeds on Intel GMA 900/950 with GMABooster. Other Intel GPUs might also be capable of changing frequencies and overlcocking.
