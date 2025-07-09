@@ -46,7 +46,7 @@
             minSlider.Location = new Point(12, 24);
             minSlider.Margin = new Padding(3, 2, 3, 2);
             minSlider.Name = "minSlider";
-            minSlider.Size = new Size(676, 45);
+            minSlider.Size = new Size(358, 45);
             minSlider.TabIndex = 0;
             minSlider.Scroll += UpdateFrequencyRangeOverride;
             // 
@@ -74,7 +74,7 @@
             maxSlider.Location = new Point(12, 85);
             maxSlider.Margin = new Padding(3, 2, 3, 2);
             maxSlider.Name = "maxSlider";
-            maxSlider.Size = new Size(676, 45);
+            maxSlider.Size = new Size(358, 45);
             maxSlider.TabIndex = 2;
             maxSlider.Scroll += UpdateFrequencyRangeOverride;
             // 
@@ -82,21 +82,23 @@
             // 
             maxFreqLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             maxFreqLabel.AutoSize = true;
-            maxFreqLabel.Location = new Point(644, 68);
+            maxFreqLabel.Location = new Point(326, 68);
             maxFreqLabel.Name = "maxFreqLabel";
             maxFreqLabel.Size = new Size(41, 15);
             maxFreqLabel.TabIndex = 4;
             maxFreqLabel.Text = "0 MHz";
+            maxFreqLabel.TextAlign = ContentAlignment.TopRight;
             // 
             // minFreqLabel
             // 
             minFreqLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             minFreqLabel.AutoSize = true;
-            minFreqLabel.Location = new Point(646, 7);
+            minFreqLabel.Location = new Point(328, 7);
             minFreqLabel.Name = "minFreqLabel";
             minFreqLabel.Size = new Size(41, 15);
             minFreqLabel.TabIndex = 5;
             minFreqLabel.Text = "0 MHz";
+            minFreqLabel.TextAlign = ContentAlignment.TopRight;
             // 
             // button1
             // 
@@ -106,7 +108,7 @@
             button1.TabIndex = 6;
             button1.Text = "Reset";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += resetButton_Click;
+            button1.Click += Reset;
             // 
             // button2
             // 
@@ -116,13 +118,13 @@
             button2.TabIndex = 7;
             button2.Text = "Unlock";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += unlockButton_Click;
+            button2.Click += EnableHardwareRange;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(382, 169);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(minFreqLabel);
@@ -133,7 +135,7 @@
             Controls.Add(minSlider);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Intel GPU Frequency";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)minSlider).EndInit();
             ((System.ComponentModel.ISupportInitialize)maxSlider).EndInit();

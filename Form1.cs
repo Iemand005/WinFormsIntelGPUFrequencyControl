@@ -6,9 +6,6 @@ namespace WinFormsIntelGPUFrequencyControl
     {
         private IntelGPUController gpuController;
 
-        private bool hasMinSliderMoved = false;
-        private bool hasMaxSliderMoved = false;
-
         public Form1()
         {
             InitializeComponent();
@@ -28,7 +25,6 @@ namespace WinFormsIntelGPUFrequencyControl
             }
 
             InitSlidersAndLabels();
-            UpdateFrequencyLabels();
         }
 
         private void UpdateFrequencyLabels()
@@ -39,13 +35,12 @@ namespace WinFormsIntelGPUFrequencyControl
 
         private void UpdateFrequencyRangeOverride(object sender, EventArgs e)
         {
-            if (minSlider.Value > maxSlider.Value)
+            if (sender == minSlider && minSlider.Value > maxSlider.Value)
                 maxSlider.Value = minSlider.Value;
+            else if (sender == maxSlider && maxSlider.Value < minSlider.Value)
+                minSlider.Value = maxSlider.Value;
 
-            if (sender == minSlider) hasMinSliderMoved = true;
-            if (sender == maxSlider) hasMaxSliderMoved = true;
-
-            if (gpuController != null) gpuController.SetFrequencyRange(hasMinSliderMoved ? minSlider.Value : 0, hasMaxSliderMoved ? maxSlider.Value : 0);
+            if (gpuController != null) gpuController.SetFrequencyRange(minSlider.Value, maxSlider.Value);
             UpdateFrequencyLabels();
         }
 
@@ -58,31 +53,19 @@ namespace WinFormsIntelGPUFrequencyControl
             gpuController.GetFrequencyRange(out double min, out double max);
             minSlider.Value = (int)min;
             maxSlider.Value = (int)max;
-
-            hasMinSliderMoved = false;
-            hasMaxSliderMoved = false;
+            UpdateFrequencyLabels();
         }
 
-        private void Reset()
+        private void Reset(object sender, EventArgs e)
         {
             gpuController.SetFrequencyRange(-1, -1);
             InitSlidersAndLabels();
         }
 
-        private void EnableHardwareRange()
+        private void EnableHardwareRange(object sender, EventArgs e)
         {
             gpuController.SetFrequencyRange(0, 0);
             InitSlidersAndLabels();
-        }
-
-        private void resetButton_Click(object sender, EventArgs e)
-        {
-            Reset();
-        }
-
-        private void unlockButton_Click(object sender, EventArgs e)
-        {
-            EnableHardwareRange();
         }
     }
 }
