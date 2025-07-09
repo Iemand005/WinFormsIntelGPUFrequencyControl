@@ -32,6 +32,8 @@
             label1 = new Label();
             label2 = new Label();
             trackBar2 = new TrackBar();
+            maxFreqLabel = new Label();
+            minFreqLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar2).BeginInit();
             SuspendLayout();
@@ -39,15 +41,15 @@
             // trackBar1
             // 
             trackBar1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            trackBar1.Location = new Point(55, 9);
+            trackBar1.Location = new Point(12, 114);
             trackBar1.Name = "trackBar1";
-            trackBar1.Size = new Size(733, 56);
+            trackBar1.Size = new Size(776, 56);
             trackBar1.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(12, 91);
             label1.Name = "label1";
             label1.Size = new Size(37, 20);
             label1.TabIndex = 1;
@@ -56,7 +58,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 71);
+            label2.Location = new Point(12, 9);
             label2.Name = "label2";
             label2.Size = new Size(34, 20);
             label2.TabIndex = 3;
@@ -65,16 +67,38 @@
             // trackBar2
             // 
             trackBar2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            trackBar2.Location = new Point(55, 71);
+            trackBar2.Location = new Point(12, 32);
             trackBar2.Name = "trackBar2";
-            trackBar2.Size = new Size(733, 56);
+            trackBar2.Size = new Size(776, 56);
             trackBar2.TabIndex = 2;
+            // 
+            // maxFreqLabel
+            // 
+            maxFreqLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            maxFreqLabel.AutoSize = true;
+            maxFreqLabel.Location = new Point(736, 91);
+            maxFreqLabel.Name = "maxFreqLabel";
+            maxFreqLabel.Size = new Size(52, 20);
+            maxFreqLabel.TabIndex = 4;
+            maxFreqLabel.Text = "0 MHz";
+            // 
+            // minFreqLabel
+            // 
+            minFreqLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            minFreqLabel.AutoSize = true;
+            minFreqLabel.Location = new Point(738, 9);
+            minFreqLabel.Name = "minFreqLabel";
+            minFreqLabel.Size = new Size(52, 20);
+            minFreqLabel.TabIndex = 5;
+            minFreqLabel.Text = "0 MHz";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(minFreqLabel);
+            Controls.Add(maxFreqLabel);
             Controls.Add(label2);
             Controls.Add(trackBar2);
             Controls.Add(label1);
@@ -94,5 +118,7 @@
         private Label label1;
         private Label label2;
         private TrackBar trackBar2;
+        private Label maxFreqLabel;
+        private Label minFreqLabel;
     }
 }
