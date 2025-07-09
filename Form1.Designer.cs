@@ -46,7 +46,7 @@
             minSlider.Name = "minSlider";
             minSlider.Size = new Size(676, 45);
             minSlider.TabIndex = 0;
-            minSlider.Scroll += minSlider_Scroll;
+            minSlider.Scroll += UpdateFrequencyRangeOverride;
             // 
             // label1
             // 
@@ -74,7 +74,7 @@
             maxSlider.Name = "maxSlider";
             maxSlider.Size = new Size(676, 45);
             maxSlider.TabIndex = 2;
-            maxSlider.Scroll += maxSlider_Scroll;
+            maxSlider.Scroll += UpdateFrequencyRangeOverride;
             // 
             // maxFreqLabel
             // 
