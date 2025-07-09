@@ -34,6 +34,8 @@
             maxSlider = new TrackBar();
             maxFreqLabel = new Label();
             minFreqLabel = new Label();
+            button1 = new Button();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)minSlider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)maxSlider).BeginInit();
             SuspendLayout();
@@ -96,11 +98,33 @@
             minFreqLabel.TabIndex = 5;
             minFreqLabel.Text = "0 MHz";
             // 
+            // button1
+            // 
+            button1.Location = new Point(12, 135);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 6;
+            button1.Text = "Reset";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += resetButton_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(93, 135);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 7;
+            button2.Text = "Unlock";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += unlockButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(700, 338);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(minFreqLabel);
             Controls.Add(maxFreqLabel);
             Controls.Add(label2);
@@ -125,5 +149,7 @@
         private TrackBar maxSlider;
         private Label maxFreqLabel;
         private Label minFreqLabel;
+        private Button button1;
+        private Button button2;
     }
 }

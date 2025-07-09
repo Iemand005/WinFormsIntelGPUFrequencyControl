@@ -6,6 +6,9 @@ namespace WinFormsIntelGPUFrequencyControl
     {
         private IntelGPUController gpuController;
 
+        private bool hasMinSliderMoved = false;
+        private bool hasMaxSliderMoved = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -16,20 +19,15 @@ namespace WinFormsIntelGPUFrequencyControl
             try
             {
                 gpuController = new IntelGPUController();
-                gpuController.GetSupportedFrequencyRange(out double minSupported, out double maxSupported);
-                minSlider.Minimum = maxSlider.Minimum = (int)minSupported;
-                minSlider.Maximum = maxSlider.Maximum = (int)maxSupported;
-
-                gpuController.GetFrequencyRange(out double min, out double max);
-                minSlider.Value = (int)min;
-                maxSlider.Value = (int)max;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error initializing Intel GPU Controller: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
                 return;
             }
 
+            InitSlidersAndLabels();
             UpdateFrequencyLabels();
         }
 
@@ -44,8 +42,47 @@ namespace WinFormsIntelGPUFrequencyControl
             if (minSlider.Value > maxSlider.Value)
                 maxSlider.Value = minSlider.Value;
 
-            if (gpuController != null) gpuController.SetFrequencyRange(minSlider.Value, maxSlider.Value);
+            if (sender == minSlider) hasMinSliderMoved = true;
+            if (sender == maxSlider) hasMaxSliderMoved = true;
+
+            if (gpuController != null) gpuController.SetFrequencyRange(hasMinSliderMoved ? minSlider.Value : 0, hasMaxSliderMoved ? maxSlider.Value : 0);
             UpdateFrequencyLabels();
+        }
+
+        private void InitSlidersAndLabels()
+        {
+            gpuController.GetSupportedFrequencyRange(out double minSupported, out double maxSupported);
+            minSlider.Minimum = maxSlider.Minimum = (int)minSupported;
+            minSlider.Maximum = maxSlider.Maximum = (int)maxSupported;
+
+            gpuController.GetFrequencyRange(out double min, out double max);
+            minSlider.Value = (int)min;
+            maxSlider.Value = (int)max;
+
+            hasMinSliderMoved = false;
+            hasMaxSliderMoved = false;
+        }
+
+        private void Reset()
+        {
+            gpuController.SetFrequencyRange(-1, -1);
+            InitSlidersAndLabels();
+        }
+
+        private void EnableHardwareRange()
+        {
+            gpuController.SetFrequencyRange(0, 0);
+            InitSlidersAndLabels();
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
+
+        private void unlockButton_Click(object sender, EventArgs e)
+        {
+            EnableHardwareRange();
         }
     }
 }
