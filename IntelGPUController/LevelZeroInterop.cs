@@ -14,7 +14,7 @@ namespace LevelZero
         FrequencyProperties = 0x1001
     }
 
-    public enum FrequencyDomain : int
+    public enum FrequencyDomain : uint
     {
         GPU = 0,
         Memory = 1
@@ -50,13 +50,13 @@ namespace LevelZero
         public static extern int Init(int flags = 0);
 
         [DllImport("ze_loader.dll", EntryPoint = "zeDriverGet", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetDriver(ref uint count, [In, Out, Optional] DriverHandle[]? driverHandles);
+        public static extern int GetDrivers(ref uint count, [In, Out, Optional] DriverHandle[]? driverHandles);
 
         [DllImport("ze_loader.dll", EntryPoint = "zeDeviceGet", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetDevice(DriverHandle driverHandle, ref uint count, [In, Out, Optional] DeviceHandle[]? deviceHandles);
+        public static extern int GetDevices(DriverHandle driverHandle, ref uint count, [In, Out, Optional] DeviceHandle[]? deviceHandles);
 
         [DllImport("ze_loader.dll", EntryPoint = "zesDeviceEnumFrequencyDomains", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int EnumDeviceFrequencyDomains(DeviceHandle deviceHandle,  ref uint count, [In, Out, Optional] FrequencyHandle[]? frequencyHandles);
+        public static extern int GetDeviceFrequencies(DeviceHandle deviceHandle,  ref uint count, [In, Out, Optional] FrequencyHandle[]? frequencyHandles);
 
         [DllImport("ze_loader.dll", EntryPoint = "zesFrequencyGetProperties", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetFrequencyProperties(FrequencyHandle frequencyHandle, ref FrequencyProperties properties);

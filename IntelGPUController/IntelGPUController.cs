@@ -16,32 +16,32 @@ namespace LevelZero
                 throw new Exception("Failed to initialize Level Zero.");
 
             uint driverCount = 0;
-            result = LevelZeroInterop.GetDriver(ref driverCount, null);
+            result = LevelZeroInterop.GetDrivers(ref driverCount, null);
             if (result != 0 || driverCount == 0)
                 throw new Exception("No drivers found.");
 
             _drivers = new DriverHandle[driverCount];
-            result = LevelZeroInterop.GetDriver(ref driverCount, _drivers);
+            result = LevelZeroInterop.GetDrivers(ref driverCount, _drivers);
             if (result != 0)
                 throw new Exception("Failed to get drivers.");
 
             uint deviceCount = 0;
-            result = LevelZeroInterop.GetDevice(_drivers[0], ref deviceCount);
+            result = LevelZeroInterop.GetDevices(_drivers[0], ref deviceCount);
             if (result != 0 || deviceCount == 0)
                 throw new Exception("No devices found.");
 
             _devices = new DeviceHandle[deviceCount];
-            result = LevelZeroInterop.GetDevice(_drivers[0], ref deviceCount, _devices);
+            result = LevelZeroInterop.GetDevices(_drivers[0], ref deviceCount, _devices);
             if (result != 0)
                 throw new Exception("Failed to get devices.");
 
 
             uint freqDomainCount = 0;
-            result = LevelZeroInterop.EnumDeviceFrequencyDomains(_devices[0], ref freqDomainCount);
+            result = LevelZeroInterop.GetDeviceFrequencies(_devices[0], ref freqDomainCount);
             if (result != 0 || freqDomainCount == 0)
                 throw new Exception("No frequency domains found.");
             _freqHandles = new FrequencyHandle[freqDomainCount];
-            result = LevelZeroInterop.EnumDeviceFrequencyDomains(_devices[0], ref freqDomainCount, _freqHandles);
+            result = LevelZeroInterop.GetDeviceFrequencies(_devices[0], ref freqDomainCount, _freqHandles);
             if (result != 0)
                 throw new Exception("Failed to enumerate frequency domains.");
         }
