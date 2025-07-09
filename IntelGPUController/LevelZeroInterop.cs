@@ -46,7 +46,7 @@ namespace LevelZero
 
     internal class LevelZeroInterop
     {
-        [DllImport("ze_loader.dll", EntryPoint = "zeInit")]
+        [DllImport("ze_lodader.dll", EntryPoint = "zeInit")]
         public static extern int Init(int flags = 0);
 
         [DllImport("ze_loader.dll", EntryPoint = "zeDriverGet", CallingConvention = CallingConvention.Cdecl)]

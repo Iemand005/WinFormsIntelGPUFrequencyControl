@@ -13,14 +13,23 @@ namespace WinFormsIntelGPUFrequencyControl
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            gpuController = new IntelGPUController();
-            gpuController.GetSupportedFrequencyRange(out double minSupported, out double maxSupported);
-            minSlider.Minimum = maxSlider.Minimum = (int)minSupported;
-            minSlider.Maximum = maxSlider.Maximum = (int)maxSupported;
+            try
+            {
+                gpuController = new IntelGPUController();
+                gpuController.GetSupportedFrequencyRange(out double minSupported, out double maxSupported);
+                minSlider.Minimum = maxSlider.Minimum = (int)minSupported;
+                minSlider.Maximum = maxSlider.Maximum = (int)maxSupported;
 
-            gpuController.GetFrequencyRange(out double min, out double max);
-            minSlider.Value = (int)min;
-            maxSlider.Value = (int)max;
+                gpuController.GetFrequencyRange(out double min, out double max);
+                minSlider.Value = (int)min;
+                maxSlider.Value = (int)max;
+            } catch (Exception ex)
+            {
+                MessageBox.Show($"Error initializing Intel GPU Controller: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+                return;
+            }
+
             UpdateFrequencyLabels();
         }
 
@@ -34,10 +43,8 @@ namespace WinFormsIntelGPUFrequencyControl
         {
             if (minSlider.Value > maxSlider.Value)
                 maxSlider.Value = minSlider.Value;
-            else if (minSlider.Value < maxSlider.Value)
-                minSlider.Value = maxSlider.Value;
 
-            gpuController.SetFrequencyRange(minSlider.Value, maxSlider.Value);
+            if (gpuController != null) gpuController.SetFrequencyRange(minSlider.Value, maxSlider.Value);
             UpdateFrequencyLabels();
         }
     }
