@@ -58,13 +58,13 @@ namespace WinFormsIntelGPUFrequencyControl
 
         private void Reset(object sender, EventArgs e)
         {
-            gpuController.SetFrequencyRange(-1, -1);
+            gpuController.SetFrequencyRange(-1, -1); // Resets to default range.
             InitSlidersAndLabels();
         }
 
         private void EnableHardwareRange(object sender, EventArgs e)
         {
-            gpuController.SetFrequencyRange(0, 0);
+            gpuController.SetFrequencyRange(0, 0); // Tells the driver to unlock the full range the hardware reports capable of.
             InitSlidersAndLabels();
         }
     }
